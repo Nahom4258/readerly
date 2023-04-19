@@ -14,9 +14,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { UserButton } from '@clerk/nextjs';
+import Link from 'next/link';
 
 const drawerWidth = 240;
-const navItems = ['Home', 'Read', 'Wishlist'];
+const navItems = [{ text: 'Home', url: '/home' }, { text: 'Read', url: '/read_books' }, { text: 'Wishlist', url: 'wishlists' }];
 
 function DrawerAppBar(props) {
     const { window } = props;
@@ -48,51 +50,54 @@ function DrawerAppBar(props) {
 
     return (
         // <Box sx={{ display: 'block' }}>
-            // <CssBaseline />
-            <AppBar sx={{backgroundColor: '#eaeced'}} component="nav">
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="start"
-                        onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: 'none' } }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-                    >
-                        Readerly
-                    </Typography>
-                    <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                        {navItems.map((item) => (
-                            <Button key={item} sx={{ color: '#000' }}>
-                                {item}
+        // <CssBaseline />
+        <AppBar sx={{ backgroundColor: '#eaeced' }} component="nav">
+            <Toolbar>
+                <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    edge="start"
+                    onClick={handleDrawerToggle}
+                    sx={{ mr: 2, display: { sm: 'none' } }}
+                >
+                    <MenuIcon />
+                </IconButton>
+                <Typography
+                    variant="h6"
+                    component="div"
+                    sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                >
+                    Readerly
+                </Typography>
+                <Box sx={{ display: { xs: 'none', sm: 'block' }, mr: 2 }}>
+                    {navItems.map((item) => (
+                        <Link href={item.url}>
+                            <Button key={item.url} sx={{ color: '#000' }}>
+                                {item.text}
                             </Button>
-                        ))}
-                    </Box>
-                </Toolbar>
-            </AppBar>
-            // <Box component="nav">
-            //     <Drawer
-            //         container={container}
-            //         variant="temporary"
-            //         open={mobileOpen}
-            //         onClose={handleDrawerToggle}
-            //         ModalProps={{
-            //             keepMounted: true, // Better open performance on mobile.
-            //         }}
-            //         sx={{
-            //             display: { xs: 'block', sm: 'none' },
-            //             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-            //         }}
-            //     >
-            //         {drawer}
-            //     </Drawer>
-            // </Box>
+                        </Link>
+                    ))}
+                </Box>
+                <UserButton />
+            </Toolbar>
+        </AppBar>
+        // <Box component="nav">
+        //     <Drawer
+        //         container={container}
+        //         variant="temporary"
+        //         open={mobileOpen}
+        //         onClose={handleDrawerToggle}
+        //         ModalProps={{
+        //             keepMounted: true, // Better open performance on mobile.
+        //         }}
+        //         sx={{
+        //             display: { xs: 'block', sm: 'none' },
+        //             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+        //         }}
+        //     >
+        //         {drawer}
+        //     </Drawer>
+        // </Box>
         // </Box>
     );
 }
