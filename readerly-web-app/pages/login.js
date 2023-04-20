@@ -1,7 +1,7 @@
 import { SignIn } from "@clerk/nextjs";
 
 const Login = () => {
-    <SignIn path="/login" routing="path" signUpUrl="/signup" />;
+    <SignIn path="/login" routing="path" signUpUrl="/signup" afterSignInUrl="/home" />;
 }
 
 export default Login;
