@@ -34,14 +34,14 @@ export default function Home() {
                 .eq('user_id', userId)
             console.log('users: ', data)
 
-            if (data.length === 0) {
+            if (!data) {
                 const { data, error } = await supabase
                     .from('users')
                     .insert(
-                        { user_id: userId }
+                        { 'User-ID': userId }
                     )
                     .single()
-                console.log('user inserted: ', data)
+                console.log('user inserted: ', data, error)
             }
         }
         getUsers()
